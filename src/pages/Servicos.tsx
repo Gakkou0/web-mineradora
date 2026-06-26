@@ -1,0 +1,89 @@
+import React, { useState, useEffect } from 'react'
+
+type Servico = {
+  id: number
+  nome: string
+  descricao: string
+}
+
+export default function Servicos() {
+  const [servicos, setServicos] = useState<Servico[]>([])
+  const [nome, setNome] = useState('')
+  const [descricao, setDescricao] = useState('')
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('servicos')
+    if (saved) {
+      setServicos(JSON.parse(saved))
+    }
+  }, [])
+
+  const cadastrar = () => {
+    if (!nome.trim() || !descricao.trim()) {
+      alert('Preencha todos os campos!')
+      return
+    }
+
+    const novo = {
+      id: Date.now(),
+      nome: nome.trim(),
+      descricao: descricao.trim(),
+    }
+
+    const updated = [...servicos, novo]
+    setServicos(updated)
+    window.localStorage.setItem('servicos', JSON.stringify(updated))
+    setNome('')
+    setDescricao('')
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Serviços</h2>
+        <p className="mt-2 text-slate-600">
+          Registre os serviços executados na mineradora e acompanhe o histórico.
+        </p>
+      </div>
+
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="text-xl font-semibold text-slate-900">Novo Serviço</h3>
+        <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto]">
+          <input
+            type="text"
+            placeholder="Nome do Serviço"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          />
+          <input
+            type="text"
+            placeholder="Descrição"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          />
+          <button
+            type="button"
+            onClick={cadastrar}
+            className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="text-xl font-semibold text-slate-900">Serviços Cadastrados</h3>
+        <ul className="mt-4 space-y-3">
+          {servicos.map((servico) => (
+            <li key={servico.id} className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+              <span className="font-semibold text-slate-900">{servico.nome}</span>
+              <span className="block text-sm text-slate-500">{servico.descricao}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}

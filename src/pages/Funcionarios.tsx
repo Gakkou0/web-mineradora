@@ -1,0 +1,84 @@
+import React, { useState, useEffect } from 'react'
+
+type Funcionario = {
+  id: number
+  nome: string
+  cargo: string
+}
+
+export default function Funcionarios() {
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([])
+  const [nome, setNome] = useState('')
+  const [cargo, setCargo] = useState('')
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('funcionarios')
+    if (saved) {
+      setFuncionarios(JSON.parse(saved))
+    }
+  }, [])
+
+  const cadastrar = () => {
+    if (!nome.trim() || !cargo.trim()) {
+      alert('Preencha todos os campos!')
+      return
+    }
+
+    const novo = { id: Date.now(), nome: nome.trim(), cargo: cargo.trim() }
+    const updated = [...funcionarios, novo]
+    setFuncionarios(updated)
+    window.localStorage.setItem('funcionarios', JSON.stringify(updated))
+    setNome('')
+    setCargo('')
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Funcionários</h2>
+        <p className="mt-2 text-slate-600">
+          Cadastre e acompanhe os colaboradores que atuam na mineradora.
+        </p>
+      </div>
+
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="text-xl font-semibold text-slate-900">Novo Funcionário</h3>
+        <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto]">
+          <input
+            type="text"
+            placeholder="Nome do Funcionário"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          />
+          <input
+            type="text"
+            placeholder="Cargo"
+            value={cargo}
+            onChange={(e) => setCargo(e.target.value)}
+            className="rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          />
+          <button
+            type="button"
+            onClick={cadastrar}
+            className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </div>
+
+      <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="text-xl font-semibold text-slate-900">Funcionários Cadastrados</h3>
+        <ul className="mt-4 space-y-3">
+          {funcionarios.map((func) => (
+            <li key={func.id} className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+              <span className="font-semibold text-slate-900">{func.nome}</span>
+              <span className="block text-sm text-slate-500">Cargo: {func.cargo}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
