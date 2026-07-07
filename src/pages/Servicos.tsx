@@ -1,11 +1,13 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { servicoService } from '../services/api'
 
 type Servico = {
   id: number
   nome: string
   descricao: string
 }
+
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export default function Servicos() {
   const [servicos, setServicos] = useState<Servico[]>([])
@@ -18,8 +20,8 @@ export default function Servicos() {
 
   const carregarServicos = async () => {
     try {
-      const dados = await servicoService.listar()
-      setServicos(dados)
+      const response = await axios.get<Servico[]>(`${apiUrl}/servicos`)
+      setServicos(response.data)
     } catch (error) {
       console.error('Erro ao carregar serviços', error)
       alert('Não foi possível carregar os serviços.')
@@ -33,7 +35,7 @@ export default function Servicos() {
     }
 
     try {
-      await servicoService.criar({ nome: nome.trim(), descricao: descricao.trim() })
+      await axios.post(`${apiUrl}/servicos`, { nome: nome.trim(), descricao: descricao.trim() })
       setNome('')
       setDescricao('')
       carregarServicos()

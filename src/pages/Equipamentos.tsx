@@ -1,11 +1,13 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { equipamentoService } from '../services/api'
 
 type Equipamento = {
   id: number
   nome: string
   setor: string
 }
+
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export default function Equipamentos() {
   const [equipamentos, setEquipamentos] = useState<Equipamento[]>([])
@@ -18,8 +20,8 @@ export default function Equipamentos() {
 
   const carregarEquipamentos = async () => {
     try {
-      const response = await equipamentoService.listar()
-      setEquipamentos(response)
+      const response = await axios.get<Equipamento[]>(`${apiUrl}/equipamentos`)
+      setEquipamentos(response.data)
     } catch (error) {
       console.error('Erro ao buscar equipamentos', error)
       setEquipamentos([])
@@ -33,7 +35,7 @@ export default function Equipamentos() {
     }
 
     try {
-      await equipamentoService.criar({ nome: nome.trim(), setor: setor.trim() })
+      await axios.post(`${apiUrl}/equipamentos`, { nome: nome.trim(), setor: setor.trim() })
       setNome('')
       setSetor('')
       carregarEquipamentos()

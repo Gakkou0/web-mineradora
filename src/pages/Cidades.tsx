@@ -1,10 +1,12 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { cidadeService } from '../services/api'
 
 type Cidade = {
   id: number
   nome: string
 }
+
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export default function Cidades() {
   const [cidades, setCidades] = useState<Cidade[]>([])
@@ -16,8 +18,8 @@ export default function Cidades() {
 
   const carregarCidades = async () => {
     try {
-      const dados = await cidadeService.listar()
-      setCidades(dados)
+      const response = await axios.get<Cidade[]>(`${apiUrl}/cidades`)
+      setCidades(response.data)
     } catch (error) {
       console.error('Erro ao carregar cidades', error)
       alert('Não foi possível carregar as cidades.')
@@ -31,7 +33,7 @@ export default function Cidades() {
     }
 
     try {
-      await cidadeService.criar({ nome: nome.trim() })
+      await axios.post(`${apiUrl}/cidades`, { nome: nome.trim() })
       setNome('')
       carregarCidades()
     } catch (error) {

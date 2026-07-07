@@ -1,11 +1,13 @@
+import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { funcionarioService } from '../services/api'
 
 type Funcionario = {
   id: number
   nome: string
   cargo: string
 }
+
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 export default function Funcionarios() {
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([])
@@ -18,8 +20,8 @@ export default function Funcionarios() {
 
   const carregarFuncionarios = async () => {
     try {
-      const dados = await funcionarioService.listar()
-      setFuncionarios(dados)
+      const response = await axios.get<Funcionario[]>(`${apiUrl}/funcionarios`)
+      setFuncionarios(response.data)
     } catch (error) {
       console.error('Erro ao carregar funcionários', error)
       alert('Não foi possível carregar os funcionários.')
@@ -33,7 +35,7 @@ export default function Funcionarios() {
     }
 
     try {
-      await funcionarioService.criar({ nome: nome.trim(), cargo: cargo.trim() })
+      await axios.post(`${apiUrl}/funcionarios`, { nome: nome.trim(), cargo: cargo.trim() })
       setNome('')
       setCargo('')
       carregarFuncionarios()
