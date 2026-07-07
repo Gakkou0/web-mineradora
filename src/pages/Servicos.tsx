@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { servicoService } from '../services/api'
 
 type Servico = {
   id: number
@@ -12,29 +13,34 @@ export default function Servicos() {
   const [descricao, setDescricao] = useState('')
 
   useEffect(() => {
-    const saved = window.localStorage.getItem('servicos')
-    if (saved) {
-      setServicos(JSON.parse(saved))
-    }
+    carregarServicos()
   }, [])
 
-  const cadastrar = () => {
+  const carregarServicos = async () => {
+    try {
+      const dados = await servicoService.listar()
+      setServicos(dados)
+    } catch (error) {
+      console.error('Erro ao carregar serviços', error)
+      alert('Não foi possível carregar os serviços.')
+    }
+  }
+
+  const cadastrar = async () => {
     if (!nome.trim() || !descricao.trim()) {
       alert('Preencha todos os campos.')
       return
     }
 
-    const novo = {
-      id: Date.now(),
-      nome: nome.trim(),
-      descricao: descricao.trim(),
+    try {
+      await servicoService.criar({ nome: nome.trim(), descricao: descricao.trim() })
+      setNome('')
+      setDescricao('')
+      carregarServicos()
+    } catch (error) {
+      console.error('Erro ao cadastrar serviço', error)
+      alert('Não foi possível salvar o serviço.')
     }
-
-    const updated = [...servicos, novo]
-    setServicos(updated)
-    window.localStorage.setItem('servicos', JSON.stringify(updated))
-    setNome('')
-    setDescricao('')
   }
 
   return (

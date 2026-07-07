@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { cidadeService } from '../services/api'
 
 type Cidade = {
   id: number
@@ -10,23 +11,33 @@ export default function Cidades() {
   const [nome, setNome] = useState('')
 
   useEffect(() => {
-    const saved = window.localStorage.getItem('cidades')
-    if (saved) {
-      setCidades(JSON.parse(saved))
-    }
+    carregarCidades()
   }, [])
 
-  const cadastrar = () => {
+  const carregarCidades = async () => {
+    try {
+      const dados = await cidadeService.listar()
+      setCidades(dados)
+    } catch (error) {
+      console.error('Erro ao carregar cidades', error)
+      alert('Não foi possível carregar as cidades.')
+    }
+  }
+
+  const cadastrar = async () => {
     if (!nome.trim()) {
       alert('Informe o nome da cidade.')
       return
     }
 
-    const novo = { id: Date.now(), nome: nome.trim() }
-    const updated = [...cidades, novo]
-    setCidades(updated)
-    window.localStorage.setItem('cidades', JSON.stringify(updated))
-    setNome('')
+    try {
+      await cidadeService.criar({ nome: nome.trim() })
+      setNome('')
+      carregarCidades()
+    } catch (error) {
+      console.error('Erro ao cadastrar cidade', error)
+      alert('Não foi possível salvar a cidade.')
+    }
   }
 
   return (

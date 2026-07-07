@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { funcionarioService } from '../services/api'
 
 type Funcionario = {
   id: number
@@ -12,24 +13,34 @@ export default function Funcionarios() {
   const [cargo, setCargo] = useState('')
 
   useEffect(() => {
-    const saved = window.localStorage.getItem('funcionarios')
-    if (saved) {
-      setFuncionarios(JSON.parse(saved))
-    }
+    carregarFuncionarios()
   }, [])
 
-  const cadastrar = () => {
+  const carregarFuncionarios = async () => {
+    try {
+      const dados = await funcionarioService.listar()
+      setFuncionarios(dados)
+    } catch (error) {
+      console.error('Erro ao carregar funcionários', error)
+      alert('Não foi possível carregar os funcionários.')
+    }
+  }
+
+  const cadastrar = async () => {
     if (!nome.trim() || !cargo.trim()) {
       alert('Preencha todos os campos.')
       return
     }
 
-    const novo = { id: Date.now(), nome: nome.trim(), cargo: cargo.trim() }
-    const updated = [...funcionarios, novo]
-    setFuncionarios(updated)
-    window.localStorage.setItem('funcionarios', JSON.stringify(updated))
-    setNome('')
-    setCargo('')
+    try {
+      await funcionarioService.criar({ nome: nome.trim(), cargo: cargo.trim() })
+      setNome('')
+      setCargo('')
+      carregarFuncionarios()
+    } catch (error) {
+      console.error('Erro ao cadastrar funcionário', error)
+      alert('Não foi possível salvar o funcionário.')
+    }
   }
 
   return (
