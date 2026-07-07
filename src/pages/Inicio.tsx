@@ -51,13 +51,10 @@ export default function Inicio() {
                 Verifique o status da conexão:
               </p>
             </div>
-            <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white ${statusColor}`}>
+            <span className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white ${statusColor}`}>
               API {statusLabel}
             </span>
           </div>
-          <p className="mt-4 text-slate-500 text-sm">
-            Verificação a cada 15 segundos na URL de API configurada.
-          </p>
         </article>
       </section>
     </div>
