@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 type Funcionario = {
   id: number
@@ -20,7 +20,7 @@ export default function Funcionarios() {
 
   const cadastrar = () => {
     if (!nome.trim() || !cargo.trim()) {
-      alert('Preencha todos os campos!')
+      alert('Preencha todos os campos.')
       return
     }
 
@@ -35,14 +35,14 @@ export default function Funcionarios() {
   return (
     <div className="space-y-6">
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Funcionários</h2>
+        <h2 className="text-2xl font-semibold text-slate-900">Funcionários</h2>
         <p className="mt-2 text-slate-600">
-          Cadastre e acompanhe os colaboradores que atuam na mineradora.
+          Registre os colaboradores e acompanhe suas funções.
         </p>
       </div>
 
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-xl font-semibold text-slate-900">Novo Funcionário</h3>
+        <h3 className="text-xl font-semibold text-slate-900">Adicionar colaborador</h3>
         <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto]">
           <input
             type="text"
@@ -63,7 +63,7 @@ export default function Funcionarios() {
             onClick={cadastrar}
             className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
           >
-            Cadastrar
+            Adicionar
           </button>
         </div>
       </div>

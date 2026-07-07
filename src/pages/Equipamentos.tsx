@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { equipamentoService } from '../services/api'
 
 type Equipamento = {
@@ -28,7 +28,7 @@ export default function Equipamentos() {
 
   const cadastrar = async () => {
     if (!nome.trim() || !setor.trim()) {
-      alert('Preencha todos os campos!')
+      alert('Preencha todos os campos.')
       return
     }
 
@@ -39,21 +39,21 @@ export default function Equipamentos() {
       carregarEquipamentos()
     } catch (error) {
       console.error('Erro ao cadastrar', error)
-      alert('Não foi possível cadastrar o equipamento.')
+      alert('Não foi possível salvar o equipamento.')
     }
   }
 
   return (
     <div className="space-y-6">
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Equipamentos</h2>
+        <h2 className="text-2xl font-semibold text-slate-900">Equipamentos</h2>
         <p className="mt-2 text-slate-600">
-          Cadastre e visualize todos os equipamentos usados na mineradora.
+          Registre e veja os equipamentos em uso.
         </p>
       </div>
 
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-xl font-semibold text-slate-900">Novo Equipamento</h3>
+        <h3 className="text-xl font-semibold text-slate-900">Adicionar equipamento</h3>
         <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto]">
           <input
             type="text"
@@ -74,7 +74,7 @@ export default function Equipamentos() {
             onClick={cadastrar}
             className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
           >
-            Cadastrar
+            Adicionar
           </button>
         </div>
       </div>

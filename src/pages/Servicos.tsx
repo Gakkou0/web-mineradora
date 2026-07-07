@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 type Servico = {
   id: number
@@ -20,7 +20,7 @@ export default function Servicos() {
 
   const cadastrar = () => {
     if (!nome.trim() || !descricao.trim()) {
-      alert('Preencha todos os campos!')
+      alert('Preencha todos os campos.')
       return
     }
 
@@ -40,14 +40,14 @@ export default function Servicos() {
   return (
     <div className="space-y-6">
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Serviços</h2>
+        <h2 className="text-2xl font-semibold text-slate-900">Serviços</h2>
         <p className="mt-2 text-slate-600">
-          Registre os serviços executados na mineradora e acompanhe o histórico.
+          Anote os serviços realizados e mantenha o histórico.
         </p>
       </div>
 
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-xl font-semibold text-slate-900">Novo Serviço</h3>
+        <h3 className="text-xl font-semibold text-slate-900">Adicionar serviço</h3>
         <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto]">
           <input
             type="text"
@@ -68,7 +68,7 @@ export default function Servicos() {
             onClick={cadastrar}
             className="rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
           >
-            Cadastrar
+            Adicionar
           </button>
         </div>
       </div>

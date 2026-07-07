@@ -14,10 +14,10 @@ function App() {
       <div className="mx-auto max-w-5xl rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/80">
         <header className="mb-6 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
-            Sistema Mineradora
+            Portal Mineradora
           </p>
           <h1 className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
-            Painel de Gestão
+            Painel de controle
           </h1>
         </header>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 type Cidade = {
   id: number
@@ -18,7 +18,7 @@ export default function Cidades() {
 
   const cadastrar = () => {
     if (!nome.trim()) {
-      alert('Preencha o nome da cidade!')
+      alert('Informe o nome da cidade.')
       return
     }
 
@@ -32,14 +32,14 @@ export default function Cidades() {
   return (
     <div className="space-y-6">
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-900">Gestão de Cidades</h2>
+        <h2 className="text-2xl font-semibold text-slate-900">Cidades</h2>
         <p className="mt-2 text-slate-600">
-          Adicione cidades usadas pela mineradora para relacionar equipamentos ou serviços.
+          Adicione as cidades relacionadas a equipamentos ou serviços.
         </p>
       </div>
 
       <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 className="text-xl font-semibold text-slate-900">Nova Cidade</h3>
+        <h3 className="text-xl font-semibold text-slate-900">Adicionar cidade</h3>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row">
           <input
             type="text"
