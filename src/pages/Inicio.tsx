@@ -46,9 +46,9 @@ export default function Inicio() {
         <article className="rounded-3xl bg-slate-100 p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Próximos passos</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Status do servidor</h3>
               <p className="mt-2 text-slate-600">
-                Integre o backend quando estiver pronto para salvar os registros.
+                Verifique o status da conexão:
               </p>
             </div>
             <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white ${statusColor}`}>
