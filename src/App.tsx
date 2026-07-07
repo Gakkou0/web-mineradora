@@ -11,27 +11,27 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-8 text-slate-900">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/80">
-        <header className="mb-6 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
-            Portal Mineradora
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
+      
+        <header className="mb-6">
+          <h1 className="mt-3 pl-3 text-3xl font-semibold text-slate-900 sm:text-4xl">
             Painel de controle
           </h1>
         </header>
 
-        <Menu setPagina={setPagina} />
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+          <main className="flex-1 rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-inner shadow-slate-100">
+            {pagina === 'inicio' && <Inicio />}
+            {pagina === 'equipamentos' && <Equipamentos />}
+            {pagina === 'cidades' && <Cidades />}
+            {pagina === 'funcionarios' && <Funcionarios />}
+            {pagina === 'servicos' && <Servicos />}
+          </main>
 
-        <main className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-inner shadow-slate-100">
-          {pagina === 'inicio' && <Inicio />}
-          {pagina === 'equipamentos' && <Equipamentos />}
-          {pagina === 'cidades' && <Cidades />}
-          {pagina === 'funcionarios' && <Funcionarios />}
-          {pagina === 'servicos' && <Servicos />}
-        </main>
+          <aside className="w-full lg:w-48 lg:flex-none">
+            <Menu setPagina={setPagina} />
+          </aside>
+        </div>
       </div>
-    </div>
   )
 }
 

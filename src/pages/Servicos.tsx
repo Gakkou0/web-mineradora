@@ -85,11 +85,17 @@ export default function Servicos() {
         <h3 className="text-xl font-semibold text-slate-900">Serviços Cadastrados</h3>
         <ul className="mt-4 space-y-3">
           {servicos.map((servico) => (
-            <li key={servico.id} className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+            <li key={servico.id} className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm">
               <span className="font-semibold text-slate-900">{servico.nome}</span>
               <span className="block text-sm text-slate-500">{servico.descricao}</span>
             </li>
           ))}
+
+          {servicos.length === 0 && (
+            <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm">
+              Nenhum serviço cadastrado.
+            </li>
+          )}
         </ul>
       </div>
     </div>

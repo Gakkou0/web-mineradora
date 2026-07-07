@@ -37,13 +37,13 @@ export default function Inicio() {
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2">
-        <article className="rounded-3xl bg-slate-100 p-5">
+        <article className="rounded-3xl border border-slate-200 bg-white p-5">
           <h3 className="text-lg font-semibold text-slate-900">Visão geral</h3>
           <p className="mt-2 text-slate-600">
             Navegue entre as páginas para registrar e consultar os dados.
           </p>
         </article>
-        <article className="rounded-3xl bg-slate-100 p-5">
+        <article className="rounded-3xl border border-slate-200 bg-white p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold text-slate-900">Status do servidor</h3>
@@ -56,6 +56,23 @@ export default function Inicio() {
             </span>
           </div>
         </article>
+      </section>
+      <section className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-slate-900">Olá João, as principais solicitações do dia:</h2>
+        <ul className="mt-4 space-y-3">
+            <a href="https://www.google.com/search?q=rocha+matriz&sca_esv=d7a897ae2fa4bc83&sxsrf=APpeQntvJvBEzVqEJto8eFj2Us2anX9V9g%3A1783451602881&source=hp&ei=0k9NaqLfMqup1sQPvrLdoQs&iflsig=ABILxe8AAAAAak1d4kZ-jxfgFxL-pvKJwI6EegEXPnKG&ved=0ahUKEwiikIv6osGVAxWrlJUCHT5ZN7QQ4dUDCCk&uact=5&oq=rocha+matriz&gs_lp=Egdnd3Mtd2l6Igxyb2NoYSBtYXRyaXoyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeSNMcUABYjBtwBHgAkAEAmAGzAaABpROqAQQwLjE1uAEDyAEA-AEBmAIToALjE8ICBBAjGCfCAgsQLhiABBixAxiDAcICDhAuGMcBGLEDGNEDGIAEwgIFEC4YgATCAggQABiABBixA8ICDhAuGIAEGIoFGLEDGIMBwgILEC4YgwEYsQMYgATCAggQLhiABBixA8ICDBAAGIAEGAoYCxixA8ICEhAuGAoYCxjHARixAxjRAxiABMICDBAuGIAEGAoYCxixA8ICDBAuGAoYCxixAxiABMICCRAAGIAEGAoYC8ICDxAuGIAEGAoYCxjHARivAcICBxAAGIAEGA3CAg0QLhiABBgNGMcBGK8BwgILEC4YgAQYxwEYrwHCAggQLhixAxiABJgDAJIHBDQuMTWgB8yTAbIHBDAuMTW4B9cTwgcGMC4xNy4yyAcsgAgB&sclient=gws-wiz">
+          <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm">
+            <span className="font-semibold text-slate-900">Serviço de Quebra de rocha Matriz</span>
+            <span className="block text-sm text-slate-500">Três solicitações pendentes de quebra de rocha matriz.</span>
+          </li>
+            </a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+          <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 shadow-sm">
+            <span className="font-semibold text-slate-900">Solicitação</span>
+              <span className="block text-sm text-slate-500"> Tem algo estranho acontecendo.</span>
+          </li>
+            </a>
+        </ul>
       </section>
     </div>
   )

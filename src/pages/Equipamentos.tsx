@@ -90,6 +90,11 @@ export default function Equipamentos() {
               <span className="block text-sm text-slate-500">Setor: {eq.setor}</span>
             </li>
           ))}
+          {equipamentos.length === 0 && (
+            <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+              Nenhum equipamento cadastrado.
+            </li>
+          )}
         </ul>
       </div>
     </div>

@@ -79,6 +79,11 @@ export default function Cidades() {
               {cidade.nome}
             </li>
           ))}
+          {cidades.length === 0 && (
+            <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+              Nenhuma cidade cadastrada.
+            </li>
+          )}
         </ul>
       </div>
     </div>

@@ -90,6 +90,11 @@ export default function Funcionarios() {
               <span className="block text-sm text-slate-500">Cargo: {func.cargo}</span>
             </li>
           ))}
+          {funcionarios.length === 0 && (
+            <li className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-4 text-slate-700 shadow-sm">
+              Nenhum funcionário cadastrado.
+            </li>
+          )}
         </ul>
       </div>
     </div>
